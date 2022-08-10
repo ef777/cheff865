@@ -22,10 +22,11 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  WidgetsFlutterBinding.ensureInitialized();
+
   HttpOverrides.global = MyHttpOverrides();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   final storage = FirebaseStorage.instance;

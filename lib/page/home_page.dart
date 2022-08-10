@@ -28,6 +28,6 @@ class _Home_pageState extends State<Home_page> {
     var size = MediaQuery.of(context).size;
     final double itemHeight = (size.height - kToolbarHeight - 80) / 2.2;
     final double itemWidth = size.width / 2;
-    return Scaffold(key: _scaffoldKey, body: Container());
+    return Scaffold(key: _scaffoldKey, appBar: AppBar(), body: Container());
   }
 }

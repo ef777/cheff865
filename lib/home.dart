@@ -3,6 +3,7 @@ import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:project_link1/config.dart';
 import 'package:project_link1/page/home_page.dart';
 import 'package:project_link1/page/item_details.dart';
+import 'package:project_link1/page/item_list.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     List<Widget> sayfalar = [
       const Home_page(),
-      const p_details(),
+      item_list(),
     ];
     return WillPopScope(
         onWillPop: () async {
@@ -80,14 +81,14 @@ class _HomeState extends State<Home> {
                     FontAwesome.home,
                     size: 20,
                   ),
-                  label: "Home Page",
+                  label: "Home",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
                     FontAwesome.shopping_bag,
                     size: 20,
                   ),
-                  label: "Products",
+                  label: "İtems",
                 ),
               ],
               currentIndex: Config.selectedIndex,
