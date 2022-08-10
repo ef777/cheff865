@@ -130,74 +130,113 @@ class p_detailsstate extends State<details> {
                       ),
                     ),
                     SliverToBoxAdapter(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                              child: MaterialButton(
-                            color: taze == true ? Colors.green : Colors.white,
-                            child: Stack(children: [
-                              Icon(
-                                FontAwesome.cube,
-                                color:
-                                    taze == true ? Colors.black : Colors.grey,
-                              ),
-                            ]),
-                            onPressed: () {
-                              setState(() {
-                                taze = taze == false ? !taze : true;
-                                toptan = false;
-                                jet = false;
-                                print(taze);
-                                print(toptan);
-                                print(jet);
-                              });
-                            },
+                      child: Container(
+                          decoration: new BoxDecoration(
+                              color: Colors.grey.shade300,
+                              borderRadius: new BorderRadius.circular(
+                                10,
+                              )),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Container(
+                                  child: TextButton(
+                                style: ButtonStyle(
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    )),
+                                    backgroundColor: MaterialStateProperty.all(
+                                      taze == true
+                                          ? Colors.white
+                                          : Colors.grey.shade300,
+                                    )),
+                                child: Stack(children: [
+                                  Text(
+                                    "Nutrition",
+                                    style: TextStyle(
+                                      color: taze == true
+                                          ? Colors.black
+                                          : Colors.grey,
+                                    ),
+                                  ),
+                                ]),
+                                onPressed: () {
+                                  setState(() {
+                                    taze = taze == false ? !taze : true;
+                                    toptan = false;
+                                    jet = false;
+                                    print(taze);
+                                    print(toptan);
+                                    print(jet);
+                                  });
+                                },
+                              )),
+                              Container(
+                                  child: TextButton(
+                                style: ButtonStyle(
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    )),
+                                    backgroundColor: MaterialStateProperty.all(
+                                      toptan == true
+                                          ? Colors.white
+                                          : Colors.grey.shade300,
+                                    )),
+                                child: Stack(children: [
+                                  Text(
+                                    "Ingredients",
+                                    style: TextStyle(
+                                      color: toptan == true
+                                          ? Colors.black
+                                          : Colors.grey,
+                                    ),
+                                  ),
+                                ]),
+                                onPressed: () {
+                                  setState(() {
+                                    taze = false;
+                                    toptan = toptan == false ? !toptan : true;
+                                    jet = false;
+                                  });
+                                },
+                              )),
+                              Container(
+                                  child: TextButton(
+                                style: ButtonStyle(
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    )),
+                                    backgroundColor: MaterialStateProperty.all(
+                                      jet == true
+                                          ? Colors.white
+                                          : Colors.grey.shade300,
+                                    )),
+                                child: Stack(children: [
+                                  Text(
+                                    "Directions",
+                                    style: TextStyle(
+                                      color: jet == true
+                                          ? Colors.black
+                                          : Colors.grey,
+                                    ),
+                                  ),
+                                ]),
+                                onPressed: () {
+                                  setState(() {
+                                    taze = false;
+                                    toptan = false;
+                                    jet = jet == false ? !jet : true;
+                                  });
+                                },
+                              )),
+                            ],
                           )),
-                          Container(
-                              child: MaterialButton(
-                            color:
-                                toptan == true ? Colors.orange : Colors.white,
-                            child: Stack(children: [
-                              Icon(
-                                FontAwesome.cubes,
-                                color:
-                                    toptan == true ? Colors.black : Colors.grey,
-                              ),
-                            ]),
-                            onPressed: () {
-                              setState(() {
-                                taze = false;
-                                toptan = toptan == false ? !toptan : true;
-                                jet = false;
-                                print(taze);
-                                print(toptan);
-                                print(jet);
-                              });
-                            },
-                          )),
-                          Container(
-                              child: MaterialButton(
-                            color: jet == true ? Colors.purple : Colors.white,
-                            child: Stack(children: [
-                              Icon(
-                                FontAwesome.motorcycle,
-                                color: jet == true ? Colors.black : Colors.grey,
-                              ),
-                            ]),
-                            onPressed: () {
-                              setState(() {
-                                taze = false;
-                                toptan = false;
-                                jet = jet == false ? !jet : true;
-                                print(taze);
-                                print(toptan);
-                                print(jet);
-                              });
-                            },
-                          )),
-                        ],
-                      ),
                     ),
                     SliverToBoxAdapter(
                         child: taze == true
@@ -212,7 +251,56 @@ class p_detailsstate extends State<details> {
                                         Expanded(child: Text(" two ")),
                                         Expanded(child: Text(" three"))
                                       ],
-                                    )
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(child: Text("Calories ")),
+                                        Expanded(
+                                            child:
+                                                Text("${widget.calories} kcal"))
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(child: Text("Protein ")),
+                                        Expanded(
+                                            child: Text("${widget.protein} g"))
+                                      ],
+                                    ),
+                                    Row(children: [
+                                      Expanded(
+                                        child: Text("Carbs"),
+                                      ),
+                                      Expanded(
+                                          child: Text("${widget.ptcarbs} g"))
+                                    ]),
+                                    Row(children: [
+                                      Expanded(
+                                        child: Text("Fiber"),
+                                      ),
+                                      Expanded(
+                                          child: Text("${widget.p1fiber} g")),
+                                    ]),
+                                    Row(children: [
+                                      Expanded(
+                                        child: Text("Sugars"),
+                                      ),
+                                      Expanded(
+                                          child: Text("${widget.p2sugars} g")),
+                                    ]),
+                                    Row(children: [
+                                      Expanded(
+                                        child: Text("Fat"),
+                                      ),
+                                      Expanded(child: Text("${widget.fat} g")),
+                                    ]),
+                                    Row(children: [
+                                      Expanded(
+                                        child: Text("Satured Fat"),
+                                      ),
+                                      Expanded(
+                                          child: Text("${widget.safat} g")),
+                                    ]),
                                   ]))
                             : null),
                     SliverToBoxAdapter(
