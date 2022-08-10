@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 // ignore: camel_case_types
 class details extends StatefulWidget {
@@ -45,8 +46,13 @@ class details extends StatefulWidget {
 class p_detailsstate extends State<details> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool taze = true, toptan = false, jet = false;
+
+  var total = 0;
   @override
   void initState() {
+    total = int.parse(widget.fat) +
+        int.parse(widget.protein) +
+        int.parse(widget.ptcarbs);
     super.initState();
   }
 
@@ -68,9 +74,21 @@ class p_detailsstate extends State<details> {
                     SliverAppBar(
                       actions: [
                         IconButton(
-                            icon: Icon(FontAwesome5.edit), onPressed: () {}),
+                            icon: Image.asset(
+                              "assets/Iconly-Bold-Paper Download.png",
+                              fit: BoxFit.fill,
+                              height: 27,
+                              width: 27,
+                            ),
+                            onPressed: () {}),
                         IconButton(
-                            icon: Icon(FontAwesome5.edit), onPressed: () {})
+                            icon: Image.asset(
+                              height: 20,
+                              width: 20,
+                              "assets/Fill 936.png",
+                              fit: BoxFit.fill,
+                            ),
+                            onPressed: () {}),
                       ],
                       expandedHeight: 250.0,
                       floating: false,
@@ -84,6 +102,8 @@ class p_detailsstate extends State<details> {
                       ),
                     ),
                     SliverToBoxAdapter(
+                        child: Padding(
+                      padding: EdgeInsets.all(15),
                       child: Row(children: [
                         Text(
                           "${widget.category} * ",
@@ -94,35 +114,52 @@ class p_detailsstate extends State<details> {
                         ),
                         Text(widget.who)
                       ]),
-                    ),
+                    )),
                     SliverToBoxAdapter(
+                        child: Padding(
+                      padding: EdgeInsets.fromLTRB(15, 0, 15, 5),
                       child: Text(
                         "${widget.name}",
                         style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                    ),
+                    )),
                     SliverToBoxAdapter(
-                      child: Text(
-                        "${widget.title}",
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.normal),
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(15, 0, 15, 5),
+                        child: Text(
+                          "${widget.title}",
+                          style: const TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w300),
+                        ),
                       ),
                     ),
                     SliverToBoxAdapter(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        padding: EdgeInsets.all(10),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          // crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(children: [
-                              Icon(Icons.add),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Image.asset(
+                                    "assets/Iconly-Bold-Time Circle.png",
+                                    fit: BoxFit.cover,
+                                  )),
                               Text("${widget.minute} mins"),
                             ]),
                             const SizedBox(
                               width: 15,
                             ),
                             Row(children: [
-                              Icon(Icons.add),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Image.asset(
+                                    "assets/Path 7739.png",
+                                    fit: BoxFit.cover,
+                                  )),
                               Text("${widget.servings} Servings")
                             ]),
                           ],
@@ -130,178 +167,336 @@ class p_detailsstate extends State<details> {
                       ),
                     ),
                     SliverToBoxAdapter(
-                      child: Container(
-                          decoration: new BoxDecoration(
-                              color: Colors.grey.shade300,
-                              borderRadius: new BorderRadius.circular(
-                                10,
-                              )),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Container(
-                                  child: TextButton(
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    )),
-                                    backgroundColor: MaterialStateProperty.all(
-                                      taze == true
-                                          ? Colors.white
-                                          : Colors.grey.shade300,
-                                    )),
-                                child: Stack(children: [
-                                  Text(
-                                    "Nutrition",
-                                    style: TextStyle(
-                                      color: taze == true
-                                          ? Colors.black
-                                          : Colors.grey,
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Container(
+                            decoration: new BoxDecoration(
+                                color: Colors.grey.shade300,
+                                borderRadius: new BorderRadius.circular(
+                                  10,
+                                )),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                    child: TextButton(
+                                  style: ButtonStyle(
+                                      shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                        taze == true
+                                            ? Colors.white
+                                            : Colors.grey.shade300,
+                                      )),
+                                  child: Stack(children: [
+                                    Text(
+                                      "Nutrition",
+                                      style: TextStyle(
+                                        color: taze == true
+                                            ? Colors.black
+                                            : Colors.grey,
+                                      ),
                                     ),
-                                  ),
-                                ]),
-                                onPressed: () {
-                                  setState(() {
-                                    taze = taze == false ? !taze : true;
-                                    toptan = false;
-                                    jet = false;
-                                    print(taze);
-                                    print(toptan);
-                                    print(jet);
-                                  });
-                                },
-                              )),
-                              Container(
-                                  child: TextButton(
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    )),
-                                    backgroundColor: MaterialStateProperty.all(
-                                      toptan == true
-                                          ? Colors.white
-                                          : Colors.grey.shade300,
-                                    )),
-                                child: Stack(children: [
-                                  Text(
-                                    "Ingredients",
-                                    style: TextStyle(
-                                      color: toptan == true
-                                          ? Colors.black
-                                          : Colors.grey,
+                                  ]),
+                                  onPressed: () {
+                                    setState(() {
+                                      taze = taze == false ? !taze : true;
+                                      toptan = false;
+                                      jet = false;
+                                      print(taze);
+                                      print(toptan);
+                                      print(jet);
+                                    });
+                                  },
+                                )),
+                                Container(
+                                    child: TextButton(
+                                  style: ButtonStyle(
+                                      shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                        toptan == true
+                                            ? Colors.white
+                                            : Colors.grey.shade300,
+                                      )),
+                                  child: Stack(children: [
+                                    Text(
+                                      "Ingredients",
+                                      style: TextStyle(
+                                        color: toptan == true
+                                            ? Colors.black
+                                            : Colors.grey,
+                                      ),
                                     ),
-                                  ),
-                                ]),
-                                onPressed: () {
-                                  setState(() {
-                                    taze = false;
-                                    toptan = toptan == false ? !toptan : true;
-                                    jet = false;
-                                  });
-                                },
-                              )),
-                              Container(
-                                  child: TextButton(
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    )),
-                                    backgroundColor: MaterialStateProperty.all(
-                                      jet == true
-                                          ? Colors.white
-                                          : Colors.grey.shade300,
-                                    )),
-                                child: Stack(children: [
-                                  Text(
-                                    "Directions",
-                                    style: TextStyle(
-                                      color: jet == true
-                                          ? Colors.black
-                                          : Colors.grey,
+                                  ]),
+                                  onPressed: () {
+                                    setState(() {
+                                      taze = false;
+                                      toptan = toptan == false ? !toptan : true;
+                                      jet = false;
+                                    });
+                                  },
+                                )),
+                                Container(
+                                    child: TextButton(
+                                  style: ButtonStyle(
+                                      shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                        jet == true
+                                            ? Colors.white
+                                            : Colors.grey.shade300,
+                                      )),
+                                  child: Stack(children: [
+                                    Text(
+                                      "Directions",
+                                      style: TextStyle(
+                                        color: jet == true
+                                            ? Colors.black
+                                            : Colors.grey,
+                                      ),
                                     ),
-                                  ),
-                                ]),
-                                onPressed: () {
-                                  setState(() {
-                                    taze = false;
-                                    toptan = false;
-                                    jet = jet == false ? !jet : true;
-                                  });
-                                },
-                              )),
-                            ],
-                          )),
+                                  ]),
+                                  onPressed: () {
+                                    setState(() {
+                                      taze = false;
+                                      toptan = false;
+                                      jet = jet == false ? !jet : true;
+                                    });
+                                  },
+                                )),
+                              ],
+                            )),
+                      ),
                     ),
                     SliverToBoxAdapter(
                         child: taze == true
-                            ? Container(
-                                child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                    Row(
-                                      children: [
-                                        Expanded(child: Text(" one ")),
-                                        Expanded(child: Text(" two ")),
-                                        Expanded(child: Text(" three"))
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Expanded(child: Text("Calories ")),
+                            ? Padding(
+                                padding: EdgeInsets.all(20),
+                                child: Container(
+                                    child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Expanded(
+                                              child: Column(children: [
+                                            Row(children: [
+                                              Padding(
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      10, 1, 0, 1),
+                                                  child: Text("Carbs",
+                                                      style: TextStyle(
+                                                          fontSize: 12))),
+                                            ]),
+                                            Row(children: [
+                                              IconButton(
+                                                  onPressed: () {},
+                                                  icon: Image.asset(
+                                                    "assets/wheat.png",
+                                                    fit: BoxFit.cover,
+                                                  )),
+                                              Text("${widget.ptcarbs}g",
+                                                  style:
+                                                      TextStyle(fontSize: 20))
+                                            ]),
+                                            Row(
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      0, 3, 0, 2),
+                                                  child:
+                                                      new LinearPercentIndicator(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width -
+                                                            260,
+                                                    animation: true,
+                                                    lineHeight: 5.0,
+                                                    animationDuration: 2500,
+                                                    percent: 0.3,
+                                                    linearStrokeCap:
+                                                        LinearStrokeCap
+                                                            .roundAll,
+                                                    progressColor: Colors.green,
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          ])),
+                                          Expanded(
+                                              child: Column(children: [
+                                            Row(children: [
+                                              Padding(
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      10, 1, 0, 1),
+                                                  child: Text("Protein",
+                                                      style: TextStyle(
+                                                          fontSize: 12)))
+                                            ]),
+                                            Row(children: [
+                                              IconButton(
+                                                  onPressed: () {},
+                                                  icon: Image.asset(
+                                                    "assets/Group 15179.png",
+                                                    fit: BoxFit.cover,
+                                                  )),
+                                              Text("${widget.protein}g",
+                                                  style:
+                                                      TextStyle(fontSize: 20))
+                                            ]),
+                                            Row(
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      0, 3, 0, 2),
+                                                  child:
+                                                      new LinearPercentIndicator(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width -
+                                                            260,
+                                                    animation: true,
+                                                    lineHeight: 5.0,
+                                                    animationDuration: 2500,
+                                                    percent: 0.8,
+                                                    linearStrokeCap:
+                                                        LinearStrokeCap
+                                                            .roundAll,
+                                                    progressColor: Colors.blue,
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          ])),
+                                          Expanded(
+                                              child: Column(children: [
+                                            Row(children: [
+                                              Padding(
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      10, 1, 0, 1),
+                                                  child: Text("Fat",
+                                                      style: TextStyle(
+                                                          fontSize: 12)))
+                                            ]),
+                                            Row(children: [
+                                              IconButton(
+                                                  onPressed: () {},
+                                                  icon: Image.asset(
+                                                    "assets/Group 15177.png",
+                                                    fit: BoxFit.cover,
+                                                  )),
+                                              Text("${widget.fat}g",
+                                                  style:
+                                                      TextStyle(fontSize: 20))
+                                            ]),
+                                            Row(
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      0, 3, 0, 2),
+                                                  child:
+                                                      new LinearPercentIndicator(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width -
+                                                            260,
+                                                    animation: true,
+                                                    lineHeight: 5.0,
+                                                    animationDuration: 2500,
+                                                    percent: 0.5,
+                                                    linearStrokeCap:
+                                                        LinearStrokeCap
+                                                            .roundAll,
+                                                    progressColor:
+                                                        Colors.lightBlue,
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          ])),
+                                        ],
+                                      ),
+                                      Divider(),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Expanded(child: Text("Calories ")),
+                                          Text("${widget.calories} kcal")
+                                        ],
+                                      ),
+                                      Divider(),
+                                      Row(
+                                        children: [
+                                          Expanded(child: Text("Protein ")),
+                                          Text("${widget.protein} g")
+                                        ],
+                                      ),
+                                      Divider(),
+                                      Row(children: [
                                         Expanded(
-                                            child:
-                                                Text("${widget.calories} kcal"))
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Expanded(child: Text("Protein ")),
+                                          child: Text("Carbs"),
+                                        ),
+                                        Text("${widget.ptcarbs} g")
+                                      ]),
+                                      Divider(),
+                                      Row(children: [
                                         Expanded(
-                                            child: Text("${widget.protein} g"))
-                                      ],
-                                    ),
-                                    Row(children: [
-                                      Expanded(
-                                        child: Text("Carbs"),
-                                      ),
-                                      Expanded(
-                                          child: Text("${widget.ptcarbs} g"))
-                                    ]),
-                                    Row(children: [
-                                      Expanded(
-                                        child: Text("Fiber"),
-                                      ),
-                                      Expanded(
-                                          child: Text("${widget.p1fiber} g")),
-                                    ]),
-                                    Row(children: [
-                                      Expanded(
-                                        child: Text("Sugars"),
-                                      ),
-                                      Expanded(
-                                          child: Text("${widget.p2sugars} g")),
-                                    ]),
-                                    Row(children: [
-                                      Expanded(
-                                        child: Text("Fat"),
-                                      ),
-                                      Expanded(child: Text("${widget.fat} g")),
-                                    ]),
-                                    Row(children: [
-                                      Expanded(
-                                        child: Text("Satured Fat"),
-                                      ),
-                                      Expanded(
-                                          child: Text("${widget.safat} g")),
-                                    ]),
-                                  ]))
+                                          child: Text("Fiber"),
+                                        ),
+                                        Text("${widget.p1fiber} g"),
+                                      ]),
+                                      Divider(),
+                                      Row(children: [
+                                        Expanded(
+                                          child: Text("Sugars"),
+                                        ),
+                                        Text("${widget.p2sugars} g")
+                                      ]),
+                                      Divider(),
+                                      Row(children: [
+                                        Expanded(
+                                          child: Text("Fat"),
+                                        ),
+                                        Text("${widget.fat} g"),
+                                      ]),
+                                      Divider(),
+                                      Row(children: [
+                                        Expanded(
+                                          child: Text("Satured Fat"),
+                                        ),
+                                        Text("${widget.safat} g"),
+                                      ]),
+                                    ])))
                             : null),
                     SliverToBoxAdapter(
                         child: toptan == true

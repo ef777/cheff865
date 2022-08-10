@@ -50,6 +50,8 @@ class item_liststate extends State<item_list> {
                     // <3> Retrieve `List<DocumentSnapshot>` from snapshot
                     final List<DocumentSnapshot> documents =
                         snapshot.data!.docs;
+                    print("length");
+                    print(documents.length);
                     return ListView(
                         children: documents
                             .map((doc) => Card(
