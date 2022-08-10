@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "184533298016",
+    "project_id": "femispace1-4c30c",
+    "storage_bucket": "femispace1-4c30c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:184533298016:android:e45b9a7e9697edf40f0c05",
+        "android_client_info": {
+          "package_name": "com.example.project_link1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "184533298016-2kinnhumeqltnla2co3tqiv3rrlisb2q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsnQn0xPIzp1d5_OaGVLFSaaPXWD7j2gs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "184533298016-2kinnhumeqltnla2co3tqiv3rrlisb2q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "184533298016-pqaqtdj13soh14kg1f8umapp229sqpg8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.projectLink1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
