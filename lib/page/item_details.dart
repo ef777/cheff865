@@ -50,9 +50,6 @@ class p_detailsstate extends State<details> {
   var total = 0;
   @override
   void initState() {
-    total = int.parse(widget.fat) +
-        int.parse(widget.protein) +
-        int.parse(widget.ptcarbs);
     super.initState();
   }
 
