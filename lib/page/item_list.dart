@@ -58,7 +58,7 @@ class item_liststate extends State<item_list> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => p_details(
+                                            builder: (context) => details(
                                                 calories: doc['calories'],
                                                 category: doc['category'],
                                                 fat: doc['fat'],

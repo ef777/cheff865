@@ -4,8 +4,8 @@ import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 
 // ignore: camel_case_types
-class p_details extends StatefulWidget {
-  String calories,
+class details extends StatefulWidget {
+  final String calories,
       category,
       fat,
       minute,
@@ -19,7 +19,7 @@ class p_details extends StatefulWidget {
       servings,
       title,
       who;
-  p_details(
+  const details(
       {Key? key,
       required this.calories,
       required this.fat,
@@ -38,13 +38,13 @@ class p_details extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<p_details> createState() => p_detailsstate();
+  State<details> createState() => p_detailsstate();
 }
 
 // ignore: camel_case_types
-class p_detailsstate extends State<p_details> {
+class p_detailsstate extends State<details> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
+  bool taze = true, toptan = false, jet = false;
   @override
   void initState() {
     super.initState();
@@ -53,6 +53,7 @@ class p_detailsstate extends State<p_details> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+
     final double itemHeight = (size.height - kToolbarHeight - 80) / 2.2;
     final double itemWidth = size.width / 2;
     return Scaffold(
@@ -113,18 +114,119 @@ class p_detailsstate extends State<p_details> {
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Row(
                           children: [
-                            Expanded(
-                              child: Text("${widget.minute} mins"),
-                            ),
+                            Row(children: [
+                              Icon(Icons.add),
+                              Text("${widget.minute} mins"),
+                            ]),
                             const SizedBox(
                               width: 15,
                             ),
-                            Expanded(
-                                child: Text("${widget.servings} Servings")),
+                            Row(children: [
+                              Icon(Icons.add),
+                              Text("${widget.servings} Servings")
+                            ]),
                           ],
                         ),
                       ),
                     ),
+                    SliverToBoxAdapter(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                              child: MaterialButton(
+                            color: taze == true ? Colors.green : Colors.white,
+                            child: Stack(children: [
+                              Icon(
+                                FontAwesome.cube,
+                                color:
+                                    taze == true ? Colors.black : Colors.grey,
+                              ),
+                            ]),
+                            onPressed: () {
+                              setState(() {
+                                taze = taze == false ? !taze : true;
+                                toptan = false;
+                                jet = false;
+                                print(taze);
+                                print(toptan);
+                                print(jet);
+                              });
+                            },
+                          )),
+                          Container(
+                              child: MaterialButton(
+                            color:
+                                toptan == true ? Colors.orange : Colors.white,
+                            child: Stack(children: [
+                              Icon(
+                                FontAwesome.cubes,
+                                color:
+                                    toptan == true ? Colors.black : Colors.grey,
+                              ),
+                            ]),
+                            onPressed: () {
+                              setState(() {
+                                taze = false;
+                                toptan = toptan == false ? !toptan : true;
+                                jet = false;
+                                print(taze);
+                                print(toptan);
+                                print(jet);
+                              });
+                            },
+                          )),
+                          Container(
+                              child: MaterialButton(
+                            color: jet == true ? Colors.purple : Colors.white,
+                            child: Stack(children: [
+                              Icon(
+                                FontAwesome.motorcycle,
+                                color: jet == true ? Colors.black : Colors.grey,
+                              ),
+                            ]),
+                            onPressed: () {
+                              setState(() {
+                                taze = false;
+                                toptan = false;
+                                jet = jet == false ? !jet : true;
+                                print(taze);
+                                print(toptan);
+                                print(jet);
+                              });
+                            },
+                          )),
+                        ],
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                        child: taze == true
+                            ? Container(
+                                child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                    Row(
+                                      children: [
+                                        Expanded(child: Text(" one ")),
+                                        Expanded(child: Text(" two ")),
+                                        Expanded(child: Text(" three"))
+                                      ],
+                                    )
+                                  ]))
+                            : null),
+                    SliverToBoxAdapter(
+                        child: toptan == true
+                            ? Container(
+                                color: Colors.blue,
+                              )
+                            : null),
+                    SliverToBoxAdapter(
+                        child: jet == true
+                            ? Container(
+                                color: Colors.orange,
+                              )
+                            : null),
                   ],
                 ))));
   }

@@ -30,7 +30,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     List<Widget> sayfalar = [
-      const Home_page(),
+      Home_page(),
       item_list(),
     ];
     return WillPopScope(
